@@ -1,0 +1,26 @@
+name: Use Hello Docker Action
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Who to greet"
+        required: false
+        default: "Octocat"
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run container action
+        id: hello
+        uses: ./.github/actions/hello-docker
+        with:
+          who: ${{ inputs.name }}
+
+      - name: Show output
+        run: |
+          echo "Uppercase: ${{ steps.hello.outputs.shout }}"
