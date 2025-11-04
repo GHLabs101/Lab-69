@@ -1,0 +1,16 @@
+name: "Hello (Docker Action)"
+description: "Greets a name and emits a computed message"
+author: "Your Name"
+inputs:
+  who:
+    description: "Name to greet"
+    required: false
+    default: "World"
+outputs:
+  shout:
+    description: "Uppercased greeting"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.who }}
